@@ -1,19 +1,21 @@
 <script setup lang="ts">
-const user = useUserStore()
-const name = $ref(user.savedName)
+import DragSelect from '../components/DragSelect.vue'
+// const user = useUserStore()
+// const name = $ref(user.savedName)
 
-const router = useRouter()
-const go = () => {
-  if (name)
-    router.push(`/hi/${encodeURIComponent(name)}`)
-}
+// const router = useRouter()
+// const go = () => {
+//   if (name)
+//     router.push(`/hi/${encodeURIComponent(name)}`)
+// }
 
-const { t } = useI18n()
+// const { t } = useI18n()
 </script>
 
 <template>
   <div>
-    <div text-4xl>
+    <DragSelect />
+    <!-- <div text-4xl>
       <div i-carbon-campsite inline-block />
     </div>
     <p>
@@ -52,7 +54,7 @@ const { t } = useI18n()
       >
         {{ t('button.go') }}
       </button>
-    </div>
+    </div> -->
   </div>
 </template>
 

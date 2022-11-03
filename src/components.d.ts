@@ -7,10 +7,22 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CatoptricLogo: typeof import('./components/CatoptricLogo.vue')['default']
+    CatotropicLogo: typeof import('./components/CatoptricLogo.vue')['default']
     Counter: typeof import('./components/Counter.vue')['default']
+    DpadController: typeof import('./components/dpad/DpadController.vue')['default']
+    DragSelect: typeof import('./components/DragSelect.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
+    MenuAccordion: typeof import('./components/sidebar/menu/MenuAccordion.vue')['default']
+    MenuMinimized: typeof import('./components/sidebar/menu/MenuMinimized.vue')['default']
+    MirrorController: typeof import('./components/MirrorController.vue')['default']
+    Navbar: typeof import('./components/navbar/Navbar.vue')['default']
     README: typeof import('./components/README.md')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Sidebar: typeof import('./components/sidebar/Sidebar.vue')['default']
+    VaIconMenuCollapsed: typeof import('./components/icons/VaIconMenuCollapsed.vue')['default']
+    VuesicLogo: typeof import('./components/VuesticLogo.vue')['default']
+    VuesticLogo: typeof import('./components/VuesticLogo.vue')['default']
   }
 }

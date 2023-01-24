@@ -1,6 +1,5 @@
 import { ViteSSG } from 'vite-ssg'
 import Previewer from 'virtual:vue-component-preview'
-import VueDragSelect from '@coleqiu/vue-drag-select'
 import { createVuestic } from 'vuestic-ui'
 import 'vuestic-ui/dist/vuestic-ui.css'
 import App from './App.vue'
@@ -20,7 +19,6 @@ export const createApp = ViteSSG(
     Object.values(import.meta.glob<{ install: UserModule }>('./modules/*.ts', { eager: true }))
       .forEach(i => i.install?.(ctx))
     ctx.app.use(Previewer)
-    ctx.app.use(VueDragSelect)
     ctx.app.use(createVuestic())
   },
 )

@@ -12,8 +12,8 @@ export default {
   },
   routes: [
     {
-      name: '5x5 Controller',
-      displayName: '5x5 Controller',
+      name: 'Dashboard',
+      displayName: 'Dashboard',
       meta: { icon: 'devices' },
     },
     {

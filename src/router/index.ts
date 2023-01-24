@@ -5,7 +5,7 @@ import AppLayout from '../layouts/AppLayout.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/:catchAll(.*)',
-    redirect: { name: '5x5 Controller' },
+    redirect: { name: 'Dashboard' },
   },
   {
     name: 'admin',
@@ -13,9 +13,9 @@ const routes: Array<RouteRecordRaw> = [
     component: AppLayout,
     children: [
       {
-        name: '5x5 Controller',
-        path: 'home',
-        component: () => import('../pages/admin/home/Home.vue'),
+        name: 'Dashboard',
+        path: 'dashboard',
+        component: () => import('../pages/admin/dashboard/index.vue'),
       },
       {
         name: 'single controller',

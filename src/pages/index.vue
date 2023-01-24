@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DragSelect from '../components/DragSelect.vue'
+import DragSelect from '../components/DragSelectMirrors.vue'
 // const user = useUserStore()
 // const name = $ref(user.savedName)
 

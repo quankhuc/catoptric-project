@@ -24,7 +24,9 @@
       "vite-plugin-pwa/client"
     ],
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["src/*"],
+      "@/components/*": ["src/components/*"],
+      "@/pages/*": ["src/pages/*"],
     }
   },
   "exclude": ["dist", "node_modules", "cypress"]

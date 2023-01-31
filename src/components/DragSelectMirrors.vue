@@ -1,5 +1,5 @@
-<script lang="ts">
-import { ref }  from 'vue'
+<!-- <script lang="ts">
+import { ref } from 'vue'
 import DragSelect from './dragSelect/DragSelect.vue'
 import DragSelectOption from './dragSelect/DragSelectOption.vue'
 import { PropType } from 'vue'
@@ -29,9 +29,9 @@ export default defineComponent({
         {{ item }}
       </DragSelectOption>
     </DragSelect>
-</template>
+</template> -->
 
-<style>
+<!-- <style>
   .drag-select {
     display: flex;
     flex-wrap: wrap;
@@ -73,4 +73,4 @@ export default defineComponent({
     color: #000000;
     background: #5fdddc;
   }
-</style>
+</style> -->

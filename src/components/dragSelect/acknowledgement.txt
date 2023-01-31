@@ -1,4 +1,0 @@
-## This folder is copied from the package Drag select component for Vue3 with TypeScript
-The url for this package is https://github.com/credred/vue-drag-select
-More features will be added into so that it can handle holding down a key and form any custom shapes
-

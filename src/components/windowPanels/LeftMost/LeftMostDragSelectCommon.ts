@@ -36,11 +36,6 @@ export interface DragSelectProps<T = unknown> {
    * the selected styles of selected DragSelectOption
    */
   selectedOptionStyle?: Record<string, unknown>;
-  /**
-   * can select multiple options by holding down the command or shift key
-   * @default true
-   */
-  selectByHoldingKey?: MaybeRef<boolean>;
 }
 
 export type InnerDragSelectProps<I extends DragSelectProps, T> = {
@@ -65,7 +60,6 @@ interface ForOptionAction {
   delete: (option: MaybeRef<Option>) => void;
   onClick: (option: MaybeRef<Option>) => void;
   onPointerDown: () => void;
-  onHoldKeySelect: (option: MaybeRef<Option>) => void;
 }
 
 export const forOptionActionKey: InjectionKey<ForOptionAction> = Symbol();

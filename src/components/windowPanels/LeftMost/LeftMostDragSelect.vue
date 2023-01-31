@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, provide, Ref, ref, toRef, unref } from 'vue';
-import { InnerDragSelectProps, forOptionActionKey, Option } from './DragSelectCommon';
-import { useClickToSelect, useDragToSelect, useHoldKeyToSelect } from './DragSelectHook';
+import { InnerDragSelectProps, forOptionActionKey, Option } from './LeftMostDragSelectCommon';
+import { useClickToSelect, useDragToSelect } from './LeftMostDragSelectHook';
 import { MaybeRef } from './typings/internal';
 import { setIsEqual } from './utils/setIsEqual';
 
@@ -13,7 +13,7 @@ const _p = defineProps({
    * @alias v-model
    */
   modelValue: {
-    default: () => [],
+    default: undefined,
     validator(value) {
       const plainValue = unref(value);
       return plainValue === undefined || Array.isArray(plainValue) || plainValue instanceof Set;
@@ -84,10 +84,9 @@ function useModelValue(modelValueRef: Ref<ArrayOrSet | undefined>) {
   return { selectedOptions, emitModelValue };
 }
 
-function useOptions(selectedOptions: MaybeRef<Set<unknown>>, onClickToSelect: (option: Option) => void, onHoldKeyToSelect: (option: Option) => void) {
+function useOptions(selectedOptions: MaybeRef<Set<unknown>>, onClickToSelect: (option: Option) => void) {
   const options = new Set<Option>();
   const clickedOnOption = ref(false);
-  const holdedAndClickedOnOption = ref(false);
   const pointerDownedOnOption = ref(false);
   provide(forOptionActionKey, {
     selectedOptionClass: toRef(props, 'selectedOptionClass'),
@@ -110,10 +109,6 @@ function useOptions(selectedOptions: MaybeRef<Set<unknown>>, onClickToSelect: (o
     onPointerDown() {
       pointerDownedOnOption.value = true;
     },
-    onHoldKeySelect(option) {
-      onHoldKeyToSelect(unref(option));
-      holdedAndClickedOnOption.value = true;
-    }
   });
 
   const consumeClickedOnOption = () => {
@@ -132,15 +127,7 @@ function useOptions(selectedOptions: MaybeRef<Set<unknown>>, onClickToSelect: (o
     }
   };
 
-  // const consumeHeldKeyOnOption = () => {
-  //   try {
-  //     return holdedAndClickedOnOption.value;
-  //   } finally {
-  //     holdedAndClickedOnOption.value = false;
-  //   }
-  // };
-
-  return { options, consumeClickedOnOption, consumePointerDownedOnOption,  };
+  return { options, consumeClickedOnOption, consumePointerDownedOnOption };
 }
 
 const { selectedOptions: currentSelectedOptions, emitModelValue } = useModelValue(
@@ -158,12 +145,10 @@ const isDisableClick = () => {
 };
 
 const onClickToSelect = useClickToSelect({ onChange, isDisableClick });
-const onHoldKeyToSelect = useHoldKeyToSelect({ onChange });
 
 const { options, consumeClickedOnOption, consumePointerDownedOnOption } = useOptions(
   currentSelectedOptions,
-  onClickToSelect,
-  onHoldKeyToSelect,
+  onClickToSelect
 );
 
 const contentRef = ref<HTMLElement>();
@@ -189,9 +174,9 @@ const areaStyle = computed(() => ({
   ...areaRectStyle.value,
 }));
 
-const dragSelectClass = computed(() => ({
-  'drag-select': true,
-  'drag-select--disabled': props.disabled,
+const leftMostDragSelectClass = computed(() => ({
+  'left-most-drag-select': true,
+  'left-most-drag-select--disabled': props.disabled,
 }));
 
 const onContentRefClick = () => {
@@ -202,14 +187,13 @@ const onContentRefClick = () => {
 defineExpose({
   isDragging,
 });
-
 </script>
 
 <template>
-  <div ref="containerRef" class="drag-select__wrapper">
-    <div ref="contentRef" :class="dragSelectClass" style="position: relative" @click="onContentRefClick">
+  <div ref="containerRef" class="left-most-drag-select__wrapper">
+    <div ref="contentRef" :class="leftMostDragSelectClass" style="position: relative" @click="onContentRefClick">
       <slot />
-      <div class="drag-select__area" :class="props.dragAreaClass" :style="areaStyle" />
+      <div class="left-most-drag-select__area" :class="props.dragAreaClass" :style="areaStyle" />
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
 import { watch, ref, unref } from 'vue';
-import { Option } from './DragSelectCommon';
+import { Option } from './TopLeftDragSelectCommon';
 import { useDragRect } from './hooks/useDragRect';
 import useAutoScrollByPoint from './hooks/useAutoScrollByPoint';
 import { MaybeNullableRef, MaybeRef, Position } from './typings/internal';
@@ -86,45 +86,5 @@ export function useClickToSelect({ onChange, isDisableClick }: UseClickToSelectC
     onChange(newSelectedOptions);
   };
 
-  // const onHold
-
   return onClickToSelect;
-}
-
-// export a function on holding key to select
-interface UseHoldKeyToSelectConfig {
-  onChange: (selectedOptions: Set<unknown>) => void;
-}
-
-export function useHoldKeyToSelect({ onChange }: UseHoldKeyToSelectConfig) {
-  const onCommandPress = ref(false);
-  const onCommandRelease = ref(false);
-
-  const isHoldingCommand = computed(() => {
-    window.onkeydown = (e) => {
-      onCommandPress.value = e.key === 'Meta';
-      onCommandRelease.value = false;
-    };
-    window.onkeyup = (e) => {
-      onCommandRelease.value = e.key === 'Meta';
-      onCommandPress.value = false;
-    };
-    if (onCommandPress.value && !onCommandRelease.value) {
-      return true;
-    }
-    else {
-      return false;
-    }
-  });
-
-  const currentSelected = computed<Set<unknown>>((option: Option) => {
-    const newSelectedOptions = new Set();
-
-    return newSelectedOptions;
-  });
-  const temp = watch(currentSelected, () => {
-    console.log('currentSelected', currentSelected.value);
-    onChange(currentSelected.value);
-  });
-  return temp;
 }

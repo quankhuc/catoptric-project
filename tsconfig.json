@@ -27,6 +27,7 @@
       "~/*": ["src/*"],
       "@/components/*": ["src/components/*"],
       "@/pages/*": ["src/pages/*"],
+      "@/TopLeft/*": ["src/components/windowPanels/TopLeft/*"],
     }
   },
   "exclude": ["dist", "node_modules", "cypress"]

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, inject, ref, computed, watch, unref } from 'vue';
-import { forOptionActionKey, Option } from './DragSelectCommon';
+import { forOptionActionKey, Option } from './LeftMostDragSelectCommon';
 
 const props = defineProps({
   value: {
@@ -17,10 +17,10 @@ const props = defineProps({
   },
 });
 
-const dragSelectOptionRef = ref<HTMLElement>();
+const leftMostDragSelectOptionRef = ref<HTMLElement>();
 
 const option = computed<Option>(() => ({
-  dom: dragSelectOptionRef.value as HTMLElement,
+  dom: leftMostDragSelectOptionRef.value as HTMLElement,
   value: props.value,
   disabled: props.disabled,
 }));
@@ -32,9 +32,9 @@ const isSelected = computed(() => {
 });
 
 const optionClass = computed(() => ({
-  'drag-select-option': true,
-  'drag-select-option--selected': isSelected.value,
-  'drag-select-option--disabled': props.disabled,
+  'left-most-drag-select-option': true,
+  'left-most-drag-select-option--selected': isSelected.value,
+  'left-most-drag-select-option--disabled': props.disabled,
   ...(dragSelectAction ? { [unref(dragSelectAction.selectedOptionClass)]: isSelected.value } : {}),
   [props.selectedClass]: isSelected.value,
 }));
@@ -46,10 +46,6 @@ const onClick = () => {
 const onPointerDown = () => {
   dragSelectAction?.onPointerDown();
 };
-
-// const onHoldSelect = () => {
-//   dragSelectAction?.onHoldKeySelect(option.value);
-// };
 
 onMounted(() => {
   const stop = watch(
@@ -74,8 +70,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="dragSelectOptionRef" :class="optionClass" @click="onClick" @pointerdown="onPointerDown" >
-  <!-- <div ref="dragSelectOptionRef" :class="optionClass" @click="onHoldSelect" @pointerdown="onPointerDown" > -->
+  <div ref="leftMostDragSelectOptionRef" :class="optionClass" @click="onClick" @pointerdown="onPointerDown">
     <slot />
   </div>
 </template>

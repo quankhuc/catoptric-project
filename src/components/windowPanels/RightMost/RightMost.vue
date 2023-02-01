@@ -1,10 +1,10 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
-import LeftMostDragSelect from './LeftMostDragSelect.vue'
-import LeftMostDragSelectOption from './LeftMostDragSelectOption.vue'
+import { defineComponent } from 'vue';
+import RightMostDragSelect from './RightMostDragSelect.vue';
+import RightMostDragSelectOption from './RightMostDragSelectOption.vue';
 
 export default defineComponent({
-  name:"LeftMost",
+  name: "RightMost",
   props: {
     selections: {
       type: Array,
@@ -19,7 +19,7 @@ export default defineComponent({
   },
   data() {
     return {
-      leftMostMirrors: [...Array(144).keys()].map((i) => i + 49),
+      rightMostMirrors: [...Array(102).keys()].map((i) => i + 193),
       selections: ref([]),
     }
   }
@@ -27,16 +27,16 @@ export default defineComponent({
 </script>
 <template>
   <va-modal v-model="enabled" hide-default-actions size="large">
-    <LeftMostDragSelect v-model="selections">
-      <LeftMostDragSelectOption v-for="item in leftMostMirrors" :value="item" :key="item">
+    <RightMostDragSelect v-model="selections">
+      <RightMostDragSelectOption v-for="item in rightMostMirrors" :value="item" :key="item">
         {{ item }}
-      </LeftMostDragSelectOption>
-    </LeftMostDragSelect>
+      </RightMostDragSelectOption>
+    </RightMostDragSelect>
     <va-card-title>
-      Left Most Mirrors
+      Right Most Mirrors
     </va-card-title>
     <va-card-content>
-      In this modal we can select all mirros on the left most window panel {{ selections }}
+      In this modal we can select all mirros on the right most window panel {{ selections }}
     </va-card-content>
     <va-card-actions>
       <va-button @click="$emit('ok', selections)" color="info">Ok</va-button>
@@ -45,31 +45,31 @@ export default defineComponent({
   </va-modal>
 </template>
 <style>
-  .left-most-drag-select {
+  .right-most-drag-select {
     display: grid;
-    grid-template-columns: repeat(16, 1fr);
+    grid-template-columns: repeat(17, 1fr);
     grid-template-rows: repeat(6, 1fr);
     grid-gap: 0.5rem;
   }
-  .left-most-drag-select__wrapper {
+  .right-most-drag-select__wrapper {
     width: 100%;
     border: 1px solid #086f5a;
     overflow-x: auto;
   }
-  .left-most-drag-select__area {
+  .right-most-drag-select__area {
     background: rgba(66, 153, 225, 0.5);
   }
-  .left-most-drag-select__area::after {
+  .right-most-drag-select__area::after {
     display: block;
     position: absolute;
-    content: " ";
+    content: "";
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     border: 1px solid rgb(66, 153, 225);
   }
-  .left-most-drag-select-option {
+  .right-most-drag-select-option {
     width: 2.5rem;
     height: 2.5rem;
     margin: 0.5rem;
@@ -80,7 +80,7 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
   }
-  .left-most-drag-select-option--selected {
+  .right-most-drag-select-option--selected {
     color: #000000;
     background: #10ccc3;
   }

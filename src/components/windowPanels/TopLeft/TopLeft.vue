@@ -19,14 +19,14 @@ export default defineComponent({
   },
   data() {
     return {
-      topLeftMirrors: [...Array(160).keys()].map((i) => i + 1),
+      topLeftMirrors: [...Array(48).keys()].map((i) => i + 1),
       selections: ref([]),
     }
   }
 })
 </script>
 <template>
-  <va-modal v-model="enabled" hide-default-actions size="large">
+  <va-modal v-model="enabled" hide-default-actions size="small">
     <TopLeftDragSelect v-model="selections">
       <TopLeftDragSelectOption v-for="item in topLeftMirrors" :value="item" :key="item">
         {{ item }}
@@ -48,8 +48,8 @@ export default defineComponent({
 <style>
   .top-left-drag-select {
     display: grid;
-    grid-template-columns: repeat(16, 1fr);
-    grid-template-rows: repeat(10, 1fr);
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(6, 1fr);
     grid-gap: 0.5rem;
   }
   .top-left-drag-select__wrapper {

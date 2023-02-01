@@ -1,10 +1,10 @@
 <script lang="ts">
 import TopLeft from "./windowPanels/TopLeft/TopLeft.vue";
 import LeftMost from "./windowPanels/LeftMost/LeftMost.vue";
-import MiddleWindowPanel2 from "./windowPanels/MiddleWindowPanel2.vue";
-import TopRightWindowPanel from "./windowPanels/TopRightWindowPanel.vue";
-import BottomLeftWindowPanel from "./windowPanels/BottomLeftWindowPanel.vue"
-import BottomRightWindowPanel from "./windowPanels/BottomRightWindowPanel.vue"
+import RightMost from "./windowPanels/RightMost/RightMost.vue";
+import TopRight from "./windowPanels/TopRight/TopRight.vue";
+import BottomLeft from "./windowPanels/BottomLeft/BottomLeft.vue";
+import BottomRight from "./windowPanels/BottomRight/BottomRight.vue";
 import { defineComponent, reactive } from "vue";
 export default defineComponent({
   name: "Dashboard",
@@ -17,40 +17,40 @@ export default defineComponent({
       selections: [],
       enabled: false,
     })
-    const middleWindowPanelInfo2 = reactive({
+    const rightMost = reactive({
       selections: [],
       enabled: false,
     })
-    const topRightWindowPanelInfo = reactive({
+    const topRight = reactive({
       selections: [],
       enabled: false,
     })
-    const bottomLeftWindowPanelInfo = reactive({
+    const bottomLeft = reactive({
       selections: [],
       enabled: false,
     })
-    const bottomRightWindowPanelInfo = reactive({
+    const bottomRight = reactive({
       selections: [],
       enabled: false,
     })
     return {
-      topLeft, leftMost, middleWindowPanelInfo2, topRightWindowPanelInfo, bottomLeftWindowPanelInfo, bottomRightWindowPanelInfo
+      topLeft, leftMost, rightMost, topRight, bottomLeft, bottomRight
     }
   },
   components: {
     TopLeft,
     LeftMost,
-    MiddleWindowPanel2,
-    TopRightWindowPanel,
-    BottomLeftWindowPanel,
-    BottomRightWindowPanel,
+    RightMost,
+    TopRight,
+    BottomLeft,
+    BottomRight,
   },
   data() {
     return {
       allSelections: {
         topLeft: [],
         leftMost: [],
-        middle2: [],
+        rightMost: [],
         topRight: [],
         bottomLeft: [],
         bottomRight: [],
@@ -74,37 +74,37 @@ export default defineComponent({
     cancelLeftMostHandler() {
       this.leftMost.enabled = false;
     },
-    okMiddleHandler2(selections: []) {
-      this.middleWindowPanelInfo2.enabled = false;
-      this.middleWindowPanelInfo2.selections = selections
-      this.allSelections["middle2"] = selections;
+    okRightMostHandler(selections: []) {
+      this.rightMost.enabled = false;
+      this.rightMost.selections = selections
+      this.allSelections["rightMost"] = selections;
     },
-    cancelMiddleHandler2() {
-      this.middleWindowPanelInfo2.enabled = false
+    cancelRightMostHandler() {
+      this.rightMost.enabled = false
     },
     okTopRightHandler(selections: []) {
-      this.topRightWindowPanelInfo.enabled = false
-      this.topRightWindowPanelInfo.selections = selections
+      this.topRight.enabled = false
+      this.topRight.selections = selections
       this.allSelections["topRight"] = selections;
     },
     cancelTopRightHandler() {
-      this.topRightWindowPanelInfo.enabled = false
+      this.topRight.enabled = false
     },
     okBottomLeftHandler(selections: []) {
-      this.bottomLeftWindowPanelInfo.enabled = false
-      this.bottomLeftWindowPanelInfo.selections = selections
+      this.bottomLeft.enabled = false
+      this.bottomLeft.selections = selections
       this.allSelections["bottomLeft"] = selections;
     },
     cancelBottomLeftHandler() {
-      this.bottomLeftWindowPanelInfo.enabled = false
+      this.bottomLeft.enabled = false
     },
     okBottomRightHandler(selections: []) {
-      this.bottomRightWindowPanelInfo.enabled = false
-      this.bottomRightWindowPanelInfo.selections = selections
+      this.bottomRight.enabled = false
+      this.bottomRight.selections = selections
       this.allSelections["bottomRight"] = selections;
     },
     cancelBottomRightHandler() {
-      this.bottomRightWindowPanelInfo.enabled = false
+      this.bottomRight.enabled = false
     },
   },
 })
@@ -117,14 +117,14 @@ export default defineComponent({
     <va-button class="panel-2" color="info" @click="leftMost.enabled = !leftMost.enabled">
       Left Most
     </va-button>
-    <va-button class="panel-3" color="info" @click="middleWindowPanelInfo2.enabled = !middleWindowPanelInfo2.enabled">
-      Top middle window panel 2
+    <va-button class="panel-3" color="info" @click="rightMost.enabled = !rightMost.enabled">
+      Right Most
     </va-button>
-    <va-button class="panel-4" color="info" @click="topRightWindowPanelInfo.enabled = !topRightWindowPanelInfo.enabled">
-      Top right window panel
+    <va-button class="panel-4" color="info" @click="topRight.enabled = !topRight.enabled">
+      Top right
     </va-button>
-    <va-button class="panel-5" color="info" @click="bottomLeftWindowPanelInfo.enabled = !bottomLeftWindowPanelInfo.enabled">
-      Bottom left window panel
+    <va-button class="panel-5" color="info" @click="bottomLeft.enabled = !bottomLeft.enabled">
+      Bottom left
     </va-button>
     <va-button class="panel-6 hidden">
       SHOULD NOT BE DISPLAYED
@@ -132,16 +132,16 @@ export default defineComponent({
     <va-button class="panel-7 hidden">
       SHOULD NOT BE DISPLAYED
     </va-button>
-    <va-button class="panel-8" color="info" @click="bottomRightWindowPanelInfo.enabled = !bottomRightWindowPanelInfo.enabled">
-      Bottom right window panel
+    <va-button class="panel-8" color="info" @click="bottomRight.enabled = !bottomRight.enabled">
+      Bottom right
     </va-button>
     <TopLeft v-model:selections="topLeft.selections" v-model:enabled="topLeft.enabled" v-on:ok="okTopLeftHandler" v-on:cancel="cancelTopLeftHandler" />
     <LeftMost v-model:selections="leftMost.selections" v-model:enabled="leftMost.enabled" v-on:ok="okLeftMostHandler" v-on:cancel="cancelLeftMostHandler" />
-    <!-- <MiddleWindowPanel2 v-model:selections="middleWindowPanelInfo2.selections" v-model:enabled="middleWindowPanelInfo2.enabled" v-on:ok="okMiddleHandler2" v-on:cancel="cancelMiddleHandler2" />
-    <TopRightWindowPanel v-model:selections="topRightWindowPanelInfo.selections" v-model:enabled="topRightWindowPanelInfo.enabled" v-on:ok="okTopRightHandler" v-on:cancel="cancelTopRightHandler" />
-    <BottomLeftWindowPanel v-model:selections="bottomLeftWindowPanelInfo.selections" v-model:enabled="bottomLeftWindowPanelInfo.enabled" v-on:ok="okBottomLeftHandler" v-on:cancel="cancelBottomLeftHandler" />
-    <BottomRightWindowPanel v-model:selections="bottomRightWindowPanelInfo.selections" v-model:enabled="bottomRightWindowPanelInfo.enabled" v-on:ok="okBottomRightHandler" v-on:cancel="cancelBottomRightHandler" /> --> -->
-    <p>All selection is {{ [...topLeft.selections, ...leftMost.selections, ...middleWindowPanelInfo2.selections, ...topRightWindowPanelInfo.selections, ...bottomLeftWindowPanelInfo.selections, ...bottomRightWindowPanelInfo.selections] }}</p>
+    <RightMost v-model:selections="rightMost.selections" v-model:enabled="rightMost.enabled" v-on:ok="okRightMostHandler" v-on:cancel="cancelRightMostHandler" />
+    <TopRight v-model:selections="topRight.selections" v-model:enabled="topRight.enabled" v-on:ok="okTopRightHandler" v-on:cancel="cancelTopRightHandler" />
+    <BottomLeft v-model:selections="bottomLeft.selections" v-model:enabled="bottomLeft.enabled" v-on:ok="okBottomLeftHandler" v-on:cancel="cancelBottomLeftHandler" />
+    <BottomRight v-model:selections="bottomRight.selections" v-model:enabled="bottomRight.enabled" v-on:ok="okBottomRightHandler" v-on:cancel="cancelBottomRightHandler" />
+    <p>All selection is {{ [...topLeft.selections, ...leftMost.selections, ...rightMost.selections, ...topRight.selections, ...bottomLeft.selections, ...bottomRight.selections] }}</p>
   </div>
 </template>
 <style scoped>
